@@ -126,7 +126,6 @@ public class MainDao {
                     break;
                 case "q":
                     quit = true;
-                    System.out.println();
                     System.out.println("bye!");
                     System.out.println();
                     break;

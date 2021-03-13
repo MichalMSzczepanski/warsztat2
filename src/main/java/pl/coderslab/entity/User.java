@@ -11,7 +11,6 @@ public class User {
 
     // constructor for initializing user in UPDATE method
     public User(){
-
     };
 
     // constructor for final user to create a profile
