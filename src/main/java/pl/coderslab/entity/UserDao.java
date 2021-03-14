@@ -36,7 +36,6 @@ public class UserDao {
             if (resultSet.next()) {
                 user.setId(resultSet.getInt(1));
             }
-            System.out.println();
             System.out.println("User created.");
             findAll();
             return user;
@@ -82,7 +81,6 @@ public class UserDao {
             readUser.setString(3, user.getPassword());
             readUser.setString(4, (String.valueOf(id)));
             if(readUser.executeUpdate() == 1){
-                System.out.println();
                 System.out.println( "update SUCCESSFUL");
                 System.out.println("updated data as follows:");
                 System.out.println("new email is: " + user.getEmail());
@@ -104,9 +102,7 @@ public class UserDao {
             PreparedStatement deleteUser = conn.prepareStatement(DELETE_USER_BY_ID);
             deleteUser.setInt(1, userId);
             if(deleteUser.executeUpdate() == 1){
-                System.out.println();
                 System.out.println("Deleting user with id #" + userId + " was successful");
-                System.out.println();
                 System.out.println("Current list of users below:");
                 PreparedStatement listAllUsers = conn.prepareStatement(SELECT_ALL_USERS);
                 ResultSet resultListOfUsers = listAllUsers.executeQuery();
@@ -127,7 +123,6 @@ public class UserDao {
     }
 
     // FIND ALL method - read all records in database and input them into an array of Users
-
     public void findAll() {
         try(Connection conn = DbUtil.getConnection()){
         PreparedStatement listAllUsers = conn.prepareStatement(SELECT_ALL_USERS);
@@ -154,9 +149,7 @@ public class UserDao {
         }
     }
 
-
     // auxilary method - validate if inputed id reflect an id in the database
-
     public static boolean validateID (int id) {
         try (Connection connection = DbUtil.getConnection()) {
             int[] arrayOfIDs = new int[0];
@@ -181,10 +174,7 @@ public class UserDao {
         }
     }
 
-
-
     // auxilary method - validate if email is already used in the data base
-
     public static boolean validateEmail(String string) {
         try (Connection connection = DbUtil.getConnection()) {
             PreparedStatement validateEmail = connection.prepareStatement(SELECT_USER_BY_EMAIL);
@@ -203,7 +193,6 @@ public class UserDao {
     }
 
     // auxilary method - copy table with users for findAll method
-
     public User[] addToArray(User u, User[] users) {
         users = Arrays.copyOf(users, users.length + 1); // Tworzymy kopię tablicy powiększoną o 1.
         users[users.length - 1] = u; // Dodajemy obiekt na ostatniej pozycji.
@@ -211,7 +200,6 @@ public class UserDao {
     }
 
     // auxilary method - password hashing
-
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }

@@ -1,5 +1,6 @@
 package pl.coderslab.production;
 
+import pl.coderslab.entity.ANSIEscapeCode;
 import pl.coderslab.entity.User;
 import pl.coderslab.entity.UserDao;
 
@@ -8,19 +9,17 @@ import java.util.Scanner;
 public class MainDao {
 
     public static void main(String[] args) {
-
-        System.out.println("Welcome to your database manager");
         System.out.println();
-
+        System.out.println(ANSIEscapeCode.ANSI_PURPLE + "Welcome to your admin database manager" + ANSIEscapeCode.ANSI_RESET);
+        System.out.println();
         Scanner scanner = new Scanner(System.in);
-
         boolean quit = false;
-
         while (!quit) {
             choseTaskToExecute();
             while(scanner.hasNextInt()){
                 System.out.println("that's a number, I need a letter");
                 scanner.nextLine();
+                System.out.println();
                 choseTaskToExecute();
             }
             String choice = scanner.nextLine().toLowerCase();
@@ -36,7 +35,7 @@ public class MainDao {
                             String newUsername = scanner.nextLine();
                             System.out.println("password");
                             String newPassword = scanner.nextLine();
-                            User user = new User(newUsername, newEmail, newPassword); // odwrocona kolejnosc, why?
+                            User user = new User(newUsername, newEmail, newPassword);
                             UserDao userDao = new UserDao();
                             userDao.create(user);
                             System.out.println();
@@ -90,7 +89,6 @@ public class MainDao {
                             UserDao userDao = new UserDao();
                             userDao.update(user, userToUpdate);
                             System.out.println("Double check if you wish - validate user with id: " + userToUpdate + " below");
-                            System.out.println();
                             userDao.findAll();
                             System.out.println();
                             break;
@@ -119,21 +117,23 @@ public class MainDao {
                     }
                     break;
                 case "v":
-                    System.out.println();
                     UserDao userDao = new UserDao();
                     userDao.findAll();
                     System.out.println();
                     break;
                 case "q":
                     quit = true;
-                    System.out.println("bye!");
+                    System.out.println(ANSIEscapeCode.ANSI_RED + "bye!" + ANSIEscapeCode.ANSI_RESET);
+                    System.out.println(" ☻/ \n" +
+                            "/▌\n" +
+                            "/\\\uFEFF");
                     System.out.println();
                     break;
             }
         }
     }
         private static void choseTaskToExecute(){
-            System.out.println("What task do you want to execute?");
+            System.out.println(ANSIEscapeCode.ANSI_PURPLE + "What task do you want to execute?" + ANSIEscapeCode.ANSI_RESET);
             System.out.println("Create user - type C");
             System.out.println("Read user - type R");
             System.out.println("Update user - type U");
