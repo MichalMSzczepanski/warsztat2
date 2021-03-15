@@ -16,13 +16,11 @@ public class MainDao {
         boolean quit = false;
         while (!quit) {
             choseTaskToExecute();
-            while(scanner.hasNextInt()){
-                System.out.println("that's a number, I need a letter");
-                scanner.nextLine();
-                System.out.println();
-                choseTaskToExecute();
-            }
             String choice = scanner.nextLine().toLowerCase();
+            if(choice != "c" || choice != "r" || choice != "u" || choice != "d" || choice != "v" || choice != "q") {
+                System.out.println("That's not an option, try again");
+                System.out.println();
+            }
             switch (choice) {
                 case "c":
                     // code for CREATE section
